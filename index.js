@@ -8,11 +8,20 @@ const GIT_CHECKOUT_BRANCH = 'git checkout';
 
 inquirer.registerPrompt(AUTOCOMPLETE_TYPE, inquirerAutocomplete);
 
-inquirer.prompt([{
-  type: AUTOCOMPLETE_TYPE,
-  name: 'branch',
-  message: 'Check out which branch?',
-  source: (answersSoFar, input) => getBranches(input),
-}]).then(({ branch }) => {
-  exec(`${GIT_CHECKOUT_BRANCH} ${branch}`);
-});
+const czechout = () => {
+  inquirer.prompt([{
+    type: AUTOCOMPLETE_TYPE,
+    name: 'branch',
+    message: 'Check out which branch?',
+    source: (answersSoFar, input) => getBranches(input),
+  }]).then(({ branch }) => {
+    exec(`${GIT_CHECKOUT_BRANCH} ${branch}`)
+  });
+};
+
+if (!module.parent) {
+  czechout();
+}
+
+module.exports = czechout;
+  

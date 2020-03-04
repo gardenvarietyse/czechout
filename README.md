@@ -12,3 +12,10 @@ czechout
 ```bash
 npx czechout
 ```
+
+### or use it in another module:
+```javascript
+const czechout = require('czechout');
+
+czechout();
+```
